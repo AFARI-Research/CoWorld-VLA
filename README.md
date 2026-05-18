@@ -30,20 +30,31 @@ Vision-Language-Action (VLA) models have emerged as a promising paradigm for end
 
 ## Release Status
 
-- [x] CoWorld-VLA inference code. Released on 2026-05-18.
+- [x] CoWorld-VLA inference code. Released on 2026-05-14.
 - [x] VLM feature cache builder. Released on 2026-05-18.
-- [ ] CoWorld-VLA checkpoint. Coming soon on Hugging Face.
+- [x] CoWorld-VLA checkpoint. Released on 2026-05-19.
 - [ ] CoWorld-VLA Training code. Coming later.
 
 This branch ships inference + NAVSIM PDM evaluation only; the default config is `configs/coworld_inference.yaml`. Training code will be released later.
 
 ## Model Zoo
 
-The inference code is ready. Model weights will be released on Hugging Face.
+Model weights are hosted on Hugging Face.
 
 | Component | Hugging Face repo | Notes |
 | --- | --- | --- |
-| CoWorld-VLA checkpoint | Coming soon | Set `COWORLD_CHECKPOINT` to the downloaded checkpoint directory or `.pt` file. |
+| CoWorld-VLA checkpoint | [hmq1211/CoWorld-VLA](https://huggingface.co/hmq1211/CoWorld-VLA) | Set `COWORLD_CHECKPOINT` to the downloaded checkpoint directory or `.pt` file. |
+
+Download the checkpoint with:
+
+```bash
+pip install -U huggingface_hub
+huggingface-cli download hmq1211/CoWorld-VLA \
+  --local-dir /path/to/CoWorld-VLA \
+  --local-dir-use-symlinks False
+```
+
+If the Hugging Face repository is private, run `huggingface-cli login` first with an account that has access.
 
 ## Setup
 
@@ -72,7 +83,7 @@ export NAVSIM_EXP_ROOT=/path/to/navsim/exp
 export COWORLD_VLM_MODEL_PATH=/path/to/Qwen3-VL-2B-Instruct
 export COWORLD_VGGT_MODEL_PATH=/path/to/vggt
 export COWORLD_VJEPA_CKPT=/path/to/vjepa2_1_vitG_384.pt
-export COWORLD_CHECKPOINT=/path/to/coworld/checkpoint
+export COWORLD_CHECKPOINT=/path/to/CoWorld-VLA/checkpoints
 ```
 
 `COWORLD_CHECKPOINT` may point either to a checkpoint directory containing `model_state_dict.pt`, or to a single `.pt` state dict; the cache builder and evaluator both consume it. `COWORLD_VGGT_MODEL_PATH` should point to the pretrained VGGT weights (or a local Hugging Face directory) — the VGGT source itself is vendored under `models/vggt/`.
