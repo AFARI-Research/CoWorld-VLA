@@ -1,0 +1,99 @@
+# Coworld inference-only configuration.
+#
+# Required environment variables:
+#   COWORLD_VLM_MODEL_PATH   Qwen3-VL model directory or HF identifier.
+#   COWORLD_VGGT_MODEL_PATH  VGGT model directory.
+#   COWORLD_VJEPA_CKPT       V-JEPA checkpoint path.
+#
+# The VLM feature cache is expected to be provided with the released checkpoint.
+# By default, scripts/evaluation/run_coworld_navsim_pdm.sh looks for it at:
+#   artifacts/vlm_feature_cache
+# Override with COWORLD_VLM_FEATURE_CACHE_DIR or --vlm-feature-cache-dir.
+
+model:
+  name: AeActtokenVla
+  dtype: bfloat16
+  freeze_vlm: true
+
+  use_wan: false
+  use_jepa: false
+  use_vggt: false
+  use_traj: false
+  use_vlm_autoreg_text_trajectory: false
+  use_cached_features: true
+  load_history_images_from_cache: true
+
+  external_vggt_context:
+    enabled: true
+    vggt_model_path: "${oc.env:COWORLD_VGGT_MODEL_PATH}"
+    pool_size: [36, 72]
+    projector: mlp
+
+  external_jepa_context:
+    enabled: true
+    teacher_ckpt: "${oc.env:COWORLD_VJEPA_CKPT}"
+    checkpoint_key: encoder
+    teacher_variant: vitG
+    teacher_dtype: bfloat16
+    teacher_input_hw: [384, 384]
+    encoder_num_frames: 8
+    tubelet_size: 2
+    patch_size: 16
+    img_temporal_dim_size: 1
+    projector: mlp
+
+  vlm_conditioning:
+    non_action_tokens: true
+    jepa_action_tokens: true
+    vggt_action_tokens: true
+    wan_action_tokens: true
+    traj_action_tokens: true
+
+  vlm:
+    model_path: "${oc.env:COWORLD_VLM_MODEL_PATH}"
+    num_jepa_action_tokens: 96
+    num_jepa_token_steps: 4
+    num_vggt_action_tokens: 108
+    num_vggt_token_steps: 9
+    num_wan_action_tokens: 96
+    num_wan_token_steps: 8
+    num_traj_action_tokens: 8
+
+  action_head:
+    name: hmef
+    action_horizon: 8
+    hmef_hidden_dim: 512
+    expert_num_layers: 4
+    expert_num_heads: 8
+    expert_head_dim: 64
+    non_action_num_queries: 96
+    external_jepa_num_queries: 64
+    external_vggt_num_queries: 64
+    denoiser_num_layers: 10
+    denoiser_num_heads: 8
+    denoiser_head_dim: 64
+    sampling_method: flow
+    flow_shift: 2.0
+    num_inference_steps: 10
+    num_train_timesteps: 1000
+    cond_hidden_dim: 256
+    score_hidden_dim: 512
+    point_dim: 3
+    score_temperature: 0.1
+    fusion_mode: per_step
+    traj_token_mask_enabled: false
+    goal_loss_enabled: false
+
+data:
+  dataset: NAVSIM_OFFICIAL
+  frame_height: 512
+  frame_width: 1024
+  num_future_frames: 8
+  num_history_image_frames: 1
+  num_history_trajectory_steps: 4
+  trajectory_frame_rate_hz: 2.0
+  camera_name: cam_f0
+
+seed: 42
+tf32: true
+vlm_feature_cache_dir: null
