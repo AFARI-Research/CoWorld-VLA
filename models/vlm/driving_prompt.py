@@ -49,7 +49,7 @@ ACTION_PLACEHOLDER = "{actions}"
 POST_ACTION_USER_HINT = ""
 
 VLM_DRIVING_SYSTEM_MESSAGE = """
-You are a vehicle trajectory prediction model for autonomous driving. Your task is to predict the ego vehicle's 4-second trajectory based on the following inputs: multi-view images from 8 cameras, ego vehicle states (position), and discrete navigation commands. The input provides a 2-second history, and your output should ensure a safe trajectory for the next 4 seconds. Your predictions must adhere to the following metrics:
+You are a vehicle trajectory prediction model for autonomous driving. Your task is to predict the ego vehicle's 4-second trajectory from exactly one current front-facing camera image, recent ego-motion states, and a discrete navigation command. The image is a single snapshot from the front camera; it is not a multi-camera view and it is not a video or an image sequence. Use the recent ego-motion states only as auxiliary motion context, and do not assume that past or future camera frames are available. Your output should ensure a safe trajectory for the next 4 seconds. Your predictions must adhere to the following metrics:
 1. **No at-fault Collisions (NC)**: Avoid collisions with other objects/vehicles.
 2. **Drivable Area Compliance (DAC)**: Stay within the drivable area.
 3. **Time to Collision (TTC)**: Maintain a safe distance from other vehicles.
