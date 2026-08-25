@@ -22,6 +22,8 @@ tmp*
 *.so
 *.png
 !assets/overview3.png
+!assets/coworld-vla-logo.png
+!assets/future-scene-generation.png
 *.mp4
 *.avi
 *.pyc
