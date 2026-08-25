@@ -10,7 +10,7 @@
 
 <sup>1</sup> [Afari Intelligent Drive](https://afari.com/) &nbsp;&nbsp; <sup>2</sup> [UESTC](https://en.uestc.edu.cn/ "University of Electronic Science and Technology of China") &nbsp;&nbsp; <sup>3</sup> [SJTU](https://en.sjtu.edu.cn/ "Shanghai Jiao Tong University") &nbsp;&nbsp; <sup>4</sup> [BUPT](https://english.bupt.edu.cn/ "Beijing University of Posts and Telecommunications") &nbsp;&nbsp; <sup>5</sup> [SEU](https://www.seu.edu.cn/english/ "Southeast University") &nbsp;&nbsp; <sup>6</sup> [TJU](https://en.tju.edu.cn/ "Tianjin University")
 
-*Equal contribution. Listed in no particular order. † Corresponding author: wangjingqi02@qianli-drive.com
+*Equal contribution. Listed in no particular order. † Corresponding author: jingqi.wang1314@gmail.com
 
 [![arXiv](https://img.shields.io/badge/arXiv-2605.10426-B31B1B?style=flat&logo=arxiv&logoColor=white)](https://arxiv.org/abs/2605.10426)
 [![Hugging Face](https://img.shields.io/badge/Hugging%20Face-CoWorld--VLA-FFD21E?style=flat&logo=huggingface&logoColor=black)](https://huggingface.co/hmq1211/CoWorld-VLA)
