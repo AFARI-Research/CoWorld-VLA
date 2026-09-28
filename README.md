@@ -21,6 +21,8 @@
 
 ## News
 
+- 🎉 `[2026/09/25]` We are thrilled to announce that CoWorld-VLA has been accepted to NeurIPS 2026!
+
 - `[2026/05/19]` The CoWorld-VLA checkpoint was released on [Hugging Face](https://huggingface.co/hmq1211/CoWorld-VLA).
 - `[2026/05/18]` The VLM feature cache builder was released.
 - `[2026/05/14]` The CoWorld-VLA inference code was released.
